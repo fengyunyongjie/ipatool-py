@@ -199,7 +199,6 @@ class StoreClient(object):
                         headers=hdrs, 
                         data=plistlib.dumps(payload)
                         )
-
         d = plistlib.loads(r.content)
         resp = StoreBuyproductResp.from_dict(d)
         if resp.cancel_purchase_batch:
@@ -243,7 +242,8 @@ class StoreClient(object):
 
     def purchase(self, appId):
         if self.iTunes_provider:
-            return None # iTunes mode will automatically purchase the app if not purchased
+            return self.buyProduct(appId, "", pricingParameters='STDQ')
+            # return None # iTunes mode will automatically purchase the app if not purchased
         else:
             return self.buyProduct_purchase(appId)
 
