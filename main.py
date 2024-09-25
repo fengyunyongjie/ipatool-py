@@ -205,7 +205,8 @@ class IPATool(object):
         appInfos = iTunes.lookup(bundleId=args.bundle_id, appId=args.appId, country=args.country)
         if appInfos.resultCount != 1:
             logger.fatal("Failed to find app in country %s with %s" % (args.country, s))
-            return
+            exit(0)
+            # return
         appInfo = appInfos.results[0]
         logger.info("Found app:\n\tName: %s\n\tVersion: %s\n\tbundleId: %s\n\tappId: %s" % (appInfo.trackName, appInfo.version, appInfo.bundleId, appInfo.trackId))
         self.appId = appInfo.trackId
